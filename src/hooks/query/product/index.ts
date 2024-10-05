@@ -1,5 +1,6 @@
-import { postProduct } from "@/apis/product";
-import { useMutation } from "@tanstack/react-query";
+import { getInfiniteProductList, postProduct } from "@/apis/product";
+import { productListType } from "@/types/product";
+import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
 
 
 export function usePostProduct() {
@@ -13,4 +14,24 @@ export function usePostProduct() {
         mutateProduct,
         isPendingMutateProduct,
     };
+}
+
+// export function useGetInfiniteProductList() {
+//     return useInfiniteQuery<productListType, Error>({
+//         queryKey: ['productRanking'],
+//         queryFn: ({ pageParam }) => getInfiniteProductList({ pageParam, categorySeq }),
+//         initialPageParam: 0,
+//         getNextPageParam: (lastPage, _) => lastPage.nextCursor,
+//     });
+// }
+
+
+export function useGetCategoryProductList(categorySeq: number) {
+    return useInfiniteQuery<productListType, Error>({
+        queryKey: ['categoryProductList'],
+        queryFn: ({ pageParam }) =>
+            getInfiniteProductList({ pageParam, categorySeq }),
+        initialPageParam: 0,
+        getNextPageParam: (lastPage, _) => lastPage.nextCursor,
+    });
 }
