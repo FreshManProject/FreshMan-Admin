@@ -60,11 +60,11 @@ export default function HomePage() {
                     </Tab>
                 </TabList>
                 {category.list.map(({ categorySeq, name }) => (
-                    <TabPanel key={categorySeq}>{name}</TabPanel>
+                    <TabPanel key={categorySeq}>
+                        <CategoryPage categorySeq={categorySeq} name={name} />
+                    </TabPanel>
                 ))}
-                <TabPanel>
-                    <CategoryPage />
-                </TabPanel>
+                <TabPanel></TabPanel>
             </Tabs>
         </div>
     );

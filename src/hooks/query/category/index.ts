@@ -19,27 +19,29 @@ export function usePostCategory() {
 }
 
 export function usePutCategory() {
-    const { mutate: mutateCategory, isPending: isPendingMutateCategory } =
+    const { mutate: putMutateCategory, isPending: isPendingPutMutateCategory } =
         useMutation({
             mutationFn: (data: { categorySeq: number; name: string }) =>
                 putCategory(data),
         });
 
     return {
-        mutateCategory,
-        isPendingMutateCategory,
+        putMutateCategory,
+        isPendingPutMutateCategory,
     };
 }
 
 export function useDeleteCategory() {
-    const { mutate: mutateCategory, isPending: isPendingMutateCategory } =
-        useMutation({
-            mutationFn: (data: { categorySeq: number }) => deleteCategory(data),
-        });
+    const {
+        mutate: deleteMutateCategory,
+        isPending: isPendingDeleteMutateCategory,
+    } = useMutation({
+        mutationFn: (data: { categorySeq: number }) => deleteCategory(data),
+    });
 
     return {
-        mutateCategory,
-        isPendingMutateCategory,
+        deleteMutateCategory,
+        isPendingDeleteMutateCategory,
     };
 }
 

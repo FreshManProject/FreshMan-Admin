@@ -30,7 +30,7 @@ export async function putCategory(data: {
 }): Promise<void> {
     try {
         const response = await axiosDefault.put(
-            `/products/categories/${data.categorySeq}`,
+            '/products/categories',
             data,
         );
 
@@ -40,12 +40,12 @@ export async function putCategory(data: {
     }
 }
 
-export async function deleteCategory(data: {
+export async function deleteCategory({categorySeq}: {
     categorySeq: number;
 }): Promise<void> {
     try {
         const response = await axiosDefault.delete(
-            `/products/categories/${data.categorySeq}`,
+            `/products/categories/${categorySeq}`,
         );
 
         if (response.data) return response.data;
