@@ -4,9 +4,11 @@ import 'react-tabs/style/react-tabs.css';
 import { HeaderTitle } from '@/components/common';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { CategoryPage, CategoryRegister } from '../Category';
+import { useGetCategory } from '@/hooks/query/category';
 
 export default function HomePage() {
     const [addCategory, setAddCategory] = useState(false);
+    const { category, isLoadingCategory } = useGetCategory();
 
     const handleClickOutside = (event: MouseEvent) => {
         const categoryRegisterTab = document.querySelector('#add-category-tab');
@@ -30,26 +32,20 @@ export default function HomePage() {
         setAddCategory((prev) => !prev);
     };
 
-    const tabs = [
-        {
-            title: 'All',
-            content: <>'Any content 2',</>,
-        },
-        {
-            title: 'Title 2',
-            content: <>'Any content 2',</>,
-        },
-    ];
+    if (isLoadingCategory || !category) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div>
             <HeaderTitle title="HOME" />
             <h2 className="pt-5">카테고리</h2>
             <Tabs className="pt-3">
                 <TabList>
-                    {tabs.map((tab, index) => (
-                        <Tab key={index}>
+                    {category.list.map(({ categorySeq, name }) => (
+                        <Tab key={categorySeq}>
                             <h3 className="h-7 bg-transparent after:none">
-                                {tab.title}
+                                {name}
                             </h3>
                         </Tab>
                     ))}
@@ -63,8 +59,8 @@ export default function HomePage() {
                         )}
                     </Tab>
                 </TabList>
-                {tabs.map((tab, index) => (
-                    <TabPanel key={index}>{tab.content}</TabPanel>
+                {category.list.map(({ categorySeq, name }) => (
+                    <TabPanel key={categorySeq}>{name}</TabPanel>
                 ))}
                 <TabPanel>
                     <CategoryPage />

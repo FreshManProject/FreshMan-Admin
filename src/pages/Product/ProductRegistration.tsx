@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useState } from 'react';
-import { usePostProduct } from '@/hooks/product';
+import { usePostProduct } from '@/hooks/query/product';
 import { useNavigate } from 'react-router';
 
 export default function ProductRegistration() {
@@ -23,7 +23,6 @@ export default function ProductRegistration() {
 
     function handleProductImage(e: React.ChangeEvent<HTMLInputElement>) {
         e.preventDefault();
-        console.log(e.target.files);
         if (e.target.files) {
             const newImages = Array.from(e.target.files).map((file) => file);
             setProductImages((prevImages) => [...prevImages, ...newImages]);
@@ -49,7 +48,7 @@ export default function ProductRegistration() {
         formData.append('categorySeq', '1');
 
         mutateProduct(formData, {
-            onSuccess: (data) => {
+            onSuccess: (_) => {
                 alert('상품이 등록되었습니다.');
                 navigate('/product');
             },

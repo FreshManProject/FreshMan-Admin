@@ -8,7 +8,17 @@ export type productType = {
     mainImages: File;
 };
 
-export type categoriesType = {
-    seq: number;
-    name: string;
-};
+// export type filterType = 'price' | 'sort' | 'categorySeq';
+
+// export interface productListParamsType {
+//     categorySeq?: number;
+//     lowPrice?: number;
+//     highPrice?: number;
+//     sort?: string;
+//     keyword?: string;
+// }
+
+// export type productListType = {
+//     list: productItemType[];
+//     count: number;
+// };

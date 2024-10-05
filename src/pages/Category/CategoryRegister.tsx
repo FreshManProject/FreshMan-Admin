@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { usePostCategory } from '@/hooks/category';
+import { usePostCategory } from '@/hooks/query/category';
 import { X, Plus } from 'lucide-react';
 import { useState } from 'react';
 
@@ -20,17 +20,17 @@ export default function CategoryRegister({ onClick }: ICategoryRegister) {
         };
 
         mutateCategory(data, {
-            onSuccess: (data) => {
-                alert("카테고리가 등록되었습니다.");
+            onSuccess: (_) => {
+                alert('카테고리가 등록되었습니다.');
                 setCategory('');
                 onClick(e);
             },
             onError: (error) => {
                 alert(error.message);
-            }
+            },
         });
     };
-    
+
     return (
         <>
             <div className="flex gap-2 bg-transparent items-center">
