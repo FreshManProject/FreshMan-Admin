@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { usePostCategory } from '@/hooks/category';
-import { checkCategoryField } from '@/lib/actions/action';
 import { X, Plus } from 'lucide-react';
 import { useState } from 'react';
 
@@ -10,7 +9,7 @@ type ICategoryRegister = {
 };
 
 export default function CategoryRegister({ onClick }: ICategoryRegister) {
-    const { mutateCategory, isPendingMutateCategory } = usePostCategory();
+    const { mutateCategory } = usePostCategory();
     const [category, setCategory] = useState<string>('');
 
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -20,27 +19,18 @@ export default function CategoryRegister({ onClick }: ICategoryRegister) {
             name: category,
         };
 
-        const success = await checkCategoryField(data);
-        if (success.error !== undefined) {
-            alert(success.error);
-            return;
-        }
-        console.log(success.success);
-        const response = await mutateCategory(data);
-        console.log(response);
-
-        try {
-            mutateCategory(data);
-            if (!isPendingMutateCategory) {
-                alert(success.success);
+        mutateCategory(data, {
+            onSuccess: (data) => {
+                alert("카테고리가 등록되었습니다.");
                 setCategory('');
                 onClick(e);
+            },
+            onError: (error) => {
+                alert(error.message);
             }
-        } catch (e) {
-            alert(e);
-        }
+        });
     };
-
+    
     return (
         <>
             <div className="flex gap-2 bg-transparent items-center">
