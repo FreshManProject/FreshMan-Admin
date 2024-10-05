@@ -7,3 +7,8 @@ export type productType = {
     thumbnailImage: File;
     mainImages: File;
 };
+
+export type categoriesType = {
+    seq: number;
+    name: string;
+};

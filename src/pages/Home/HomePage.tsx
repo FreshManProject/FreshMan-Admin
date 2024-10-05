@@ -3,7 +3,7 @@ import 'react-tabs/style/react-tabs.css';
 
 import { HeaderTitle } from '@/components/common';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { CategoryRegister } from '../Category';
+import { CategoryPage, CategoryRegister } from '../Category';
 
 export default function HomePage() {
     const [addCategory, setAddCategory] = useState(false);
@@ -66,6 +66,9 @@ export default function HomePage() {
                 {tabs.map((tab, index) => (
                     <TabPanel key={index}>{tab.content}</TabPanel>
                 ))}
+                <TabPanel>
+                    <CategoryPage />
+                </TabPanel>
             </Tabs>
         </div>
     );

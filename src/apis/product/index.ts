@@ -1,6 +1,3 @@
-// process.env
-// .REACT_APP_FRESHMAN_PUBLIC_API_URL;
-
 import { axiosForm } from '..';
 
 export async function postProduct(data: FormData): Promise<void> {
