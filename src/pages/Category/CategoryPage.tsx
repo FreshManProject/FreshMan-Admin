@@ -2,7 +2,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { useDeleteCategory, usePutCategory } from '@/hooks/query/category';
+import { useGetCategoryProductList } from '@/hooks/query/product';
 import { useState } from 'react';
+import ProductInfiniteList from '../Product/ProductInfiniteList';
 
 interface ICategoryPage {
     categorySeq: number;
@@ -12,6 +14,8 @@ export default function CategoryPage({ categorySeq, name }: ICategoryPage) {
     const [isEdit, setIsEdit] = useState<boolean>(false);
     const { putMutateCategory } = usePutCategory();
     const { deleteMutateCategory } = useDeleteCategory();
+
+    const result = useGetCategoryProductList(categorySeq);
 
     const handleDeleteCategory = async () => {
         deleteMutateCategory(
@@ -94,12 +98,7 @@ export default function CategoryPage({ categorySeq, name }: ICategoryPage) {
                     )}
                 </CardHeader>
                 <CardContent>
-                    <div className="flex justify-between">
-                        <div className="flex gap-2 items-center">
-                            <span>{categorySeq}</span>
-                            <span>{name}</span>
-                        </div>
-                    </div>
+                    <ProductInfiniteList result={result} />
                 </CardContent>
             </Card>
         </>

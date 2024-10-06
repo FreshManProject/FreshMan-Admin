@@ -6,11 +6,14 @@ import { Label } from '@/components/ui/label';
 import { useState } from 'react';
 import { usePostProduct } from '@/hooks/query/product';
 import { useNavigate } from 'react-router';
+import CategoryOption from '../Category/CategoryOption';
 
 export default function ProductRegistration() {
     const [thumbnail, setThumbnail] = useState<File>();
     const [productImages, setProductImages] = useState<File[]>([]);
-    // const [name, setName] = useState<string>();
+
+    const [selectedItem, setSelectedItem] = useState<number>();
+
     const { mutateProduct } = usePostProduct();
     const navigate = useNavigate();
 
@@ -45,12 +48,17 @@ export default function ProductRegistration() {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         // 임시로 categorySeq를 1로 설정
-        formData.append('categorySeq', '1');
+        if (selectedItem !== undefined) {
+            formData.append('categorySeq', selectedItem.toString());
+        } else {
+            alert('카테고리를 선택해주세요.');
+            return;
+        }
 
         mutateProduct(formData, {
             onSuccess: (_) => {
                 alert('상품이 등록되었습니다.');
-                navigate('/product');
+                // navigate('/product');
             },
             onError: (error) => {
                 alert(error.message);
@@ -150,6 +158,12 @@ export default function ProductRegistration() {
                             <div className="basic-input-label-box">
                                 <Label htmlFor="price">가격</Label>
                                 <Input id="price" name="price" type="number" />
+                            </div>
+                            <div className="basic-input-label-box">
+                                <Label>카테고리</Label>
+                                <CategoryOption
+                                    setSelectedItem={setSelectedItem}
+                                />
                             </div>
                             <Button className="w-full mt-4" type="submit">
                                 등록
