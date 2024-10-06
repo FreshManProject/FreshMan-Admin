@@ -1,4 +1,4 @@
-import { PrimaryBkButton } from '@/components/common/Button';
+import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 
 export default function RegisterSuccessPage() {
@@ -20,13 +20,7 @@ export default function RegisterSuccessPage() {
                 </div>
             </div>
             <div className="fixed bottom-0 left-0 right-0 m-auto max-w-default px-4 pb-8 [&>button]:w-full">
-                <PrimaryBkButton
-                    handleClick={() => navigate('/')}
-                    type="button"
-                    customStyle="w-full"
-                >
-                    홈으로 가기
-                </PrimaryBkButton>
+                <Button onClick={() => navigate('/')}>홈으로 가기</Button>
             </div>
         </section>
     );

@@ -1,11 +1,12 @@
+import InputField from '@/components/common/InputField';
+import PostCodeModel from '@/components/common/PostCodeModel';
+import { Button } from '@/components/ui/button';
+import { usePostJoinMember } from '@/hooks/query/user';
+import useMemberValidation from '@/hooks/useMemberValidation';
 import {
     RegisterUserFormData,
     registerUserSchema,
-} from '@/types/Validation/yupRegister';
-import { usePostJoinMember } from '@/hooks/query/user';
-import useMemberValidation from '@/hooks/useMemberValidation';
-import { PrimaryBkButton } from '../common/Button';
-import { InputField, PostCodeModal } from '../common';
+} from '@/types/validation/yupRegister';
 
 export default function RegisterForm() {
     const { register, handleSubmit, setValue, errors, isValid } =
@@ -63,7 +64,7 @@ export default function RegisterForm() {
                 register={register}
                 readonly
                 errorMsg={errors.address?.message || ''}
-                inputBtn={<PostCodeModal setAddress={setValue} />}
+                inputBtn={<PostCodeModel setAddress={setValue} />}
             />
             <InputField
                 type="text"
@@ -73,9 +74,9 @@ export default function RegisterForm() {
                 errorMsg={errors.addressDetail?.message || ''}
             />
             <div className="fixed bottom-0 left-0 right-0 m-auto max-w-default px-4 pb-8 [&>button]:w-full">
-                <PrimaryBkButton disabled={!isValid} type="submit">
+                <Button disabled={!isValid} type="submit">
                     가입하기
-                </PrimaryBkButton>
+                </Button>
             </div>
         </form>
     );
