@@ -1,26 +1,27 @@
-import { axiosDefault } from '..';
+import { axiosAuth } from '..';
 import { categoryListType } from '@/types/category';
 
 export async function getCategory(): Promise<categoryListType> {
     try {
-        const response = await axiosDefault.get('/products/categories');
-        console.log(response.data);
-        if (response.data) return response.data;
-        throw new Error(
-            `Unexpected response : ${response.status} ${response.statusText}`,
-        );
+        const response = await axiosAuth.get('/products/categories');
+
+        if (response.data.status === 200) return response.data;
+
+        throw new Error(`${response.data.status} ${response.data.message}`);
     } catch (error) {
-        throw new Error('Failed to post category');
+        throw new Error(`${error}\n카테고리 목록을 불러오는데 실패했습니다.`);
     }
 }
 
 export async function postCategory(data: { name: string }): Promise<void> {
     try {
-        const response = await axiosDefault.post('/products/categories', data);
+        const response = await axiosAuth.post('/products/categories', data);
 
-        if (response.data) return response.data;
+        if (response.data.status === 200) return response.data;
+
+        throw new Error(`${response.data.status} ${response.data.message}`);
     } catch (error) {
-        throw new Error('카테고리 등록에 실패했습니다.');
+        throw new Error(`${error}\n카테고리 등록에 실패했습니다.`);
     }
 }
 
@@ -29,27 +30,30 @@ export async function putCategory(data: {
     name: string;
 }): Promise<void> {
     try {
-        const response = await axiosDefault.put(
-            '/products/categories',
-            data,
-        );
+        const response = await axiosAuth.put('/products/categories', data);
 
-        if (response.data) return response.data;
+        if (response.data.status === 200) return response.data;
+
+        throw new Error(`${response.data.status} ${response.data.message}`);
     } catch (error) {
-        throw new Error('카테고리 수정에 실패했습니다.');
+        throw new Error(`${error}\n카테고리 수정에 실패했습니다.`);
     }
 }
 
-export async function deleteCategory({categorySeq}: {
+export async function deleteCategory({
+    categorySeq,
+}: {
     categorySeq: number;
 }): Promise<void> {
     try {
-        const response = await axiosDefault.delete(
+        const response = await axiosAuth.delete(
             `/products/categories/${categorySeq}`,
         );
 
-        if (response.data) return response.data;
+        if (response.data.status === 200) return response.data;
+
+        throw new Error(`${response.data.status} ${response.data.message}`);
     } catch (error) {
-        throw new Error('카테고리 삭제에 실패했습니다.');
+        throw new Error(`${error}\n카테고리 삭제에 실패했습니다.`);
     }
 }

@@ -16,16 +16,6 @@ export function usePostProduct() {
     };
 }
 
-// export function useGetInfiniteProductList() {
-//     return useInfiniteQuery<productListType, Error>({
-//         queryKey: ['productRanking'],
-//         queryFn: ({ pageParam }) => getInfiniteProductList({ pageParam, categorySeq }),
-//         initialPageParam: 0,
-//         getNextPageParam: (lastPage, _) => lastPage.nextCursor,
-//     });
-// }
-
-
 export function useGetCategoryProductList(categorySeq: number) {
     return useInfiniteQuery<productListType, Error>({
         queryKey: ['categoryProductList'],

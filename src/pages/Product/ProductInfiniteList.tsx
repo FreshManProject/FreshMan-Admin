@@ -39,6 +39,7 @@ export default function ProductInfiniteList({
     
     return (
         <ul className={'flex flex-wrap gap-y-10'}>
+            {list.length === 0 && <p>아직 등록된 상품이 없습니다.</p>}
             {list.map((item) => (
                 <ProductItem size={'s'} key={item.productSeq} {...item} />
             ))}

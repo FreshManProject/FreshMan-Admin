@@ -73,7 +73,6 @@ export default function ProductPage() {
                 ))}
                 <TabPanel></TabPanel>
             </Tabs>
-            {/* <section>아직 등록된 상품이 없습니다.</section> */}
         </>
     );
 }
