@@ -1,22 +1,8 @@
-import { getUserQnaList } from '@/apis/qna';
-import {
-    deleteMember,
-    getInfiniteLikedList,
-    getUserInfo,
-    postMember,
-    putMember,
-    putMemberAddress,
-} from '@/apis/user';
-import { pageSize } from '@/constants/infinitescroll';
+
+import { deleteMember, getUserInfo, postMember, putMember, putMemberAddress } from '@/apis/user';
 import { useAuthStore } from '@/store/user';
-import { productListType } from '@/types/Product/productList';
-import { QnaListType } from '@/types/User/qna';
-import {
-    UserEditAddressType,
-    UserEditType,
-    UserType,
-} from '@/types/User/registerUser';
-import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
+import { UserEditAddressType, UserEditType, UserType } from '@/types/user/registerUser';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
 export function useGetUserInfo(status = true) {
@@ -34,44 +20,6 @@ export function useGetUserInfo(status = true) {
         isLoadingUserInfo,
         isErrorUserInfo,
     };
-}
-
-export function useGetUserQnaList() {
-    return useInfiniteQuery<QnaListType, Error>({
-        queryKey: ['myQnaList'],
-        queryFn: getUserQnaList,
-        initialPageParam: undefined,
-        getNextPageParam: (lastPage, allPages) => {
-            const nextPage = allPages.length + 1;
-            // 상품이 0개이거나 rowsPerPage보다 작을 경우 마지막 페이지로 인식한다.
-            return lastPage?.count === 0 || lastPage?.count < pageSize
-                ? undefined
-                : nextPage;
-        },
-        retry: 0,
-        refetchOnMount: false,
-        refetchOnReconnect: false,
-        refetchOnWindowFocus: false,
-    });
-}
-
-export function useGetInfiniteLikedList() {
-    return useInfiniteQuery<productListType, Error>({
-        queryKey: ['LikeList'],
-        queryFn: getInfiniteLikedList,
-        initialPageParam: undefined,
-        getNextPageParam: (lastPage, allPages) => {
-            const nextPage = allPages.length + 1;
-            // 상품이 0개이거나 rowsPerPage보다 작을 경우 마지막 페이지로 인식한다.
-            return lastPage?.count === 0 || lastPage?.count < pageSize
-                ? undefined
-                : nextPage;
-        },
-        retry: 0,
-        refetchOnMount: false,
-        refetchOnReconnect: false,
-        refetchOnWindowFocus: false,
-    });
 }
 
 export function usePostJoinMember() {
