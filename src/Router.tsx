@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import GlobalError from './GlobalError';
 import HomePage from './pages/Home/HomePage';
-import RootLayout from './pages/RooteLayout';
+import RootLayout from './pages/RootLayout';
 import { ProductPage, ProductRegistrationPage } from './pages/Product';
 
 export default function Router() {
