@@ -1,6 +1,6 @@
 import { FieldValues, UseFormRegister, Path } from 'react-hook-form';
 import { Input } from '../ui/input';
-import { RegisterUserFormData } from '@/types/validation/yupRegister';
+import { LoginUserFormData } from '@/types/validation/yupRegister';
 
 interface Props<T extends FieldValues> {
     name?: string;
@@ -14,7 +14,7 @@ interface Props<T extends FieldValues> {
     defaultValue?: string | number;
 }
 
-export default function InputField<T extends RegisterUserFormData>({
+export default function InputField<T extends LoginUserFormData>({
     name,
     id,
     type,
@@ -41,15 +41,14 @@ export default function InputField<T extends RegisterUserFormData>({
                     placeholder={placeholder}
                     readOnly={readonly}
                     className={
-                        'rounded-none text-body3 text-bk placeholder:text-gray300'
+                        'rounded-none text-body3 text-bk bg-white placeholder:text-gray300'
                     }
                     {...register(id)}
-                    // {...register('name')}
                 />
                 {inputBtn}
             </div>
             {errorMsg && (
-                <p className="mt-1 text-body3 text-pointRed">{errorMsg}</p>
+                <p className="mt-1 text-body3 text-destructive">{errorMsg}</p>
             )}
         </div>
     );

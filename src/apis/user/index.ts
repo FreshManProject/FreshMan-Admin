@@ -1,9 +1,9 @@
-import { UserEditAddressType, UserEditType, UserType } from "@/types/user/registerUser";
+import { AdminType, LoginAdminType } from '@/types/user/registerUser';
 import { axiosAuth } from "..";
 
-export async function getUserInfo(): Promise<Required<UserType>> {
+export async function getUserInfo(): Promise<Required<AdminType>> {
     try {
-        const response = await axiosAuth.get('/members');
+        const response = await axiosAuth.get('/admin');
         if (response.data) {
             return response.data.data;
         }
@@ -12,63 +12,18 @@ export async function getUserInfo(): Promise<Required<UserType>> {
         );
     } catch (error) {
         console.error(error);
-        throw new Error('user 정보 불러오기에 실패했습니다');
+        throw new Error('admin 정보 불러오기에 실패했습니다');
     }
 }
 
-export async function postMember(data: UserType) {
+export async function postAdmin(data: AdminType) {
     try {
-        const response = await axiosAuth.post('/members', data);
-        if (response.status !== 200) {
-            return true;
+        const response = (await axiosAuth.post('/admin/login', data)).data;
+        if (response.status === 200) {
+            return response.data;
         }
         throw new Error(
-            `Unexpected response : ${response.status} ${response.statusText}`,
-        );
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
-}
-
-export async function deleteMember() {
-    try {
-        const response = await axiosAuth.delete('/members');
-        if (response.status !== 200) {
-            return true;
-        }
-        throw new Error(
-            `Unexpected response : ${response.status} ${response.statusText}`,
-        );
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
-}
-
-export async function putMember(data: UserEditType) {
-    try {
-        const response = await axiosAuth.put('/members/personal-info', data);
-        if (response.status !== 200) {
-            return true;
-        }
-        throw new Error(
-            `Unexpected response : ${response.status} ${response.statusText}`,
-        );
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
-}
-
-export async function putMemberAddress(data: UserEditAddressType) {
-    try {
-        const response = await axiosAuth.put('/members/address', data);
-        if (response.status !== 200) {
-            return true;
-        }
-        throw new Error(
-            `Unexpected response : ${response.status} ${response.statusText}`,
+            `Unexpected response : ${response.status} ${response.message}`,
         );
     } catch (error) {
         console.error(error);

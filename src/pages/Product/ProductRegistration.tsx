@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { usePostProduct } from '@/hooks/query/product';
 import { useNavigate } from 'react-router';
 import CategoryOption from '../Category/CategoryOption';
+import { Nav } from '@/components/common';
 
 export default function ProductRegistration() {
     const [thumbnail, setThumbnail] = useState<File>();
@@ -58,7 +59,7 @@ export default function ProductRegistration() {
         mutateProduct(formData, {
             onSuccess: (_) => {
                 alert('상품이 등록되었습니다.');
-                // navigate('/product');
+                navigate('/product');
             },
             onError: (error) => {
                 alert(error.message);
@@ -68,110 +69,133 @@ export default function ProductRegistration() {
 
     return (
         <>
-            <Card x-chunk="dashboard-07-chunk-0">
-                <CardHeader className="font-bold text-xl">상품 등록</CardHeader>
-                <CardContent>
-                    <form
-                        className="grid w-full items-start gap-6 overflow-auto"
-                        onSubmit={handleSubmit}
-                    >
-                        <fieldset className="grid gap-6">
-                            <div className="basic-input-label-box">
-                                <Label htmlFor="thumbnailimages">썸네일</Label>
-                                <Label className="cursor-pointer flex aspect-square w-5 h-5 items-center justify-center rounded-md border border-dashed">
-                                    <Upload className="h-4 w-4 text-muted-foreground" />
-                                    <input
-                                        name="thumbnailimages"
-                                        type="file"
-                                        onChange={handleThumbnailChange}
-                                        className="hidden"
-                                    />
-                                </Label>
-                                {thumbnail && (
-                                    <div className="w-40 h-40 bg-slate-400">
-                                        <img
-                                            src={URL.createObjectURL(thumbnail)}
-                                            alt={URL.createObjectURL(thumbnail)}
-                                            className="h-full w-full object-cover"
+            <Nav />
+            <main className="flex flex-col py-6 sm:gap-4 sm:py-4 sm:pl-20 px-5">
+                <Card x-chunk="dashboard-07-chunk-0">
+                    <CardHeader className="font-bold text-xl">
+                        상품 등록
+                    </CardHeader>
+                    <CardContent>
+                        <form
+                            className="grid w-full items-start gap-6 overflow-auto"
+                            onSubmit={handleSubmit}
+                        >
+                            <fieldset className="grid gap-6">
+                                <div className="basic-input-label-box">
+                                    <Label htmlFor="thumbnailImages">
+                                        썸네일
+                                    </Label>
+                                    <Label className="cursor-pointer flex aspect-square w-5 h-5 items-center justify-center rounded-md border border-dashed">
+                                        <Upload className="h-4 w-4 text-muted-foreground" />
+                                        <input
+                                            name="thumbnailImage"
+                                            type="file"
+                                            onChange={handleThumbnailChange}
+                                            className="hidden"
                                         />
-                                    </div>
-                                )}
-                            </div>
-
-                            <div className="basic-input-label-box">
-                                <Label htmlFor="mainimages">
-                                    상품 이미지(최대 5개)
-                                </Label>
-                                <Label className="cursor-pointer flex aspect-square w-5 h-5 items-center justify-center rounded-md border border-dashed">
-                                    <Upload className="h-4 w-4 text-muted-foreground" />
-                                    <input
-                                        name="mainimages"
-                                        type="file"
-                                        className="hidden"
-                                        multiple
-                                        onChange={handleProductImage}
-                                    />
-                                </Label>
-                                {/* 미리보기 이미지 */}
-                                <ul className="flex gap-2 w-full overflow-x-auto">
-                                    {productImages.map((image, index) => (
-                                        <li
-                                            key={index}
-                                            className="relative w-40 h-40 bg-slate-400 shrink-0"
-                                        >
+                                    </Label>
+                                    {thumbnail && (
+                                        <div className="w-40 h-40 bg-slate-400">
                                             <img
-                                                src={URL.createObjectURL(image)}
-                                                alt={URL.createObjectURL(image)}
+                                                src={URL.createObjectURL(
+                                                    thumbnail,
+                                                )}
+                                                alt={URL.createObjectURL(
+                                                    thumbnail,
+                                                )}
                                                 className="h-full w-full object-cover"
                                             />
-                                            <Button
-                                                className="absolute w-8 h-8 px-0 top-1 right-1"
-                                                onClick={() =>
-                                                    handleDeleteProductImage(
-                                                        image.name,
-                                                    )
-                                                }
-                                            >
-                                                <X color="#fff" size={15} />
-                                            </Button>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                                        </div>
+                                    )}
+                                </div>
 
-                            <div className="basic-input-label-box">
-                                <Label htmlFor="name">상품명</Label>
-                                <Input id="name" name="name" type="text" />
-                            </div>
-                            <div className="basic-input-label-box">
-                                <Label htmlFor="description">설명</Label>
-                                <Input
-                                    id="description"
-                                    name="description"
-                                    type="text"
-                                />
-                            </div>
-                            <div className="basic-input-label-box">
-                                <Label htmlFor="brand">브랜드</Label>
-                                <Input id="brand" name="brand" type="text" />
-                            </div>
-                            <div className="basic-input-label-box">
-                                <Label htmlFor="price">가격</Label>
-                                <Input id="price" name="price" type="number" />
-                            </div>
-                            <div className="basic-input-label-box">
-                                <Label>카테고리</Label>
-                                <CategoryOption
-                                    setSelectedItem={setSelectedItem}
-                                />
-                            </div>
-                            <Button className="w-full mt-4" type="submit">
-                                등록
-                            </Button>
-                        </fieldset>
-                    </form>
-                </CardContent>
-            </Card>
+                                <div className="basic-input-label-box">
+                                    <Label htmlFor="mainImages">
+                                        상품 이미지(최대 5개)
+                                    </Label>
+                                    <Label className="cursor-pointer flex aspect-square w-5 h-5 items-center justify-center rounded-md border border-dashed">
+                                        <Upload className="h-4 w-4 text-muted-foreground" />
+                                        <input
+                                            name="mainImages"
+                                            type="file"
+                                            className="hidden"
+                                            multiple
+                                            onChange={handleProductImage}
+                                        />
+                                    </Label>
+                                    {/* 미리보기 이미지 */}
+                                    <ul className="flex gap-2 w-full overflow-x-auto">
+                                        {productImages.map((image, index) => (
+                                            <li
+                                                key={index}
+                                                className="relative w-40 h-40 bg-slate-400 shrink-0"
+                                            >
+                                                <img
+                                                    src={URL.createObjectURL(
+                                                        image,
+                                                    )}
+                                                    alt={URL.createObjectURL(
+                                                        image,
+                                                    )}
+                                                    className="h-full w-full object-cover"
+                                                />
+                                                <Button
+                                                    className="absolute w-8 h-8 px-0 top-1 right-1"
+                                                    onClick={() =>
+                                                        handleDeleteProductImage(
+                                                            image.name,
+                                                        )
+                                                    }
+                                                >
+                                                    <X color="#fff" size={15} />
+                                                </Button>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                <div className="basic-input-label-box">
+                                    <Label htmlFor="name">상품명</Label>
+                                    <Input id="name" name="name" type="text" />
+                                </div>
+                                <div className="basic-input-label-box">
+                                    <Label htmlFor="description">설명</Label>
+                                    <Input
+                                        id="description"
+                                        name="description"
+                                        type="text"
+                                    />
+                                </div>
+                                <div className="basic-input-label-box">
+                                    <Label htmlFor="brand">브랜드</Label>
+                                    <Input
+                                        id="brand"
+                                        name="brand"
+                                        type="text"
+                                    />
+                                </div>
+                                <div className="basic-input-label-box">
+                                    <Label htmlFor="price">가격</Label>
+                                    <Input
+                                        id="price"
+                                        name="price"
+                                        type="number"
+                                    />
+                                </div>
+                                <div className="basic-input-label-box">
+                                    <Label>카테고리</Label>
+                                    <CategoryOption
+                                        setSelectedItem={setSelectedItem}
+                                    />
+                                </div>
+                                <Button className="w-full mt-4" type="submit">
+                                    등록
+                                </Button>
+                            </fieldset>
+                        </form>
+                    </CardContent>
+                </Card>
+            </main>
         </>
     );
 }

@@ -1,11 +1,10 @@
-export interface UserType {
-    name: string;
-    phone: string;
-    address: string;
-    addressDetail: string;
+export interface AdminType {
     email: string;
-    initialized?: boolean;
+    password: string;
+}
+export interface LoginAdminType {
+    accessToken: string;
+    refreshToken: string;
 }
 
-export type UserEditType = Pick<UserType, 'name' | 'phone' | 'email'>;
-export type UserEditAddressType = Pick<UserType, 'addressDetail' | 'address'>;
+export type AdminEditType = Pick<AdminType, 'email'>;

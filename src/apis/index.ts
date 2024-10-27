@@ -25,7 +25,7 @@ export const axiosForm = axios.create({
 const refreshAccessToken = async () => {
     try {
         const response = await axios.post(
-            `${process.env.REACT_APP_FRESHMAN_PUBLIC_API_URL}reissue`,
+            `${import.meta.env.VITE_APP_FRESHMAN_PUBLIC_API_URL}reissue`,
             {},
             {
                 headers: {
@@ -67,11 +67,12 @@ const retryRequestWithNewToken = async (
 axiosAuth.interceptors.request.use(
     async (config) => {
         const modifiedConfig = { ...config };
-        const accessToken = localStorage.getItem(ACCESSTOKEN);
+        // const accessToken = localStorage.getItem(ACCESSTOKEN);
 
-        if (accessToken) {
-            modifiedConfig.headers.Authorization = `Bearer ${accessToken}`;
-        }
+        // if (accessToken) {
+
+        //     modifiedConfig.headers.Authorization = `Bearer ${accessToken}`;
+        // }
         return modifiedConfig;
     },
     (error) => {
