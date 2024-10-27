@@ -1,8 +1,8 @@
-import { getUserInfo, postAdmin } from "@/apis/user";
-import { useAuthStore } from "@/store/user";
-import { AdminType } from "@/types/user/registerUser";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { getUserInfo, postAdmin } from '@/apis/user';
+import { useAuthStore } from '@/store/user';
+import { AdminType } from '@/types/user/registerUser';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
 export function useGetUserInfo(status = true) {
     const {

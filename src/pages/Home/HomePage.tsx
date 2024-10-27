@@ -1,7 +1,6 @@
-
 import { HeaderTitle, Nav } from '@/components/common';
-export default function HomePage() {
 
+export default function HomePage() {
     return (
         <div>
             <Nav />

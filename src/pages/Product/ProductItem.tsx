@@ -1,15 +1,11 @@
-import { Link } from 'react-router-dom';
 import { productItemType } from '@/types/product';
 import { formatNumber } from '@/util/formatData';
 
 interface IProductItemProps extends productItemType {
-    size: 's' | 'm' | 'full';
     className?: '';
 }
 
 export default function ProductItem({
-    size,
-    productSeq,
     name,
     brand,
     price,
@@ -18,7 +14,9 @@ export default function ProductItem({
     className,
 }: IProductItemProps) {
     return (
-        <li className={`basis-1/3 md:basis-1/4 lg:basis-1/6 h-full ${className}`}>
+        <li
+            className={`basis-1/3 md:basis-1/4 lg:basis-1/6 h-full ${className}`}
+        >
             <img
                 src={image}
                 alt={name}

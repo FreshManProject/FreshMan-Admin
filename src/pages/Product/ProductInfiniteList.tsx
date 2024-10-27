@@ -11,9 +11,7 @@ interface IProductInfiniteList {
     >;
 }
 
-export default function ProductInfiniteList({
-    result,
-}: IProductInfiniteList) {
+export default function ProductInfiniteList({ result }: IProductInfiniteList) {
     const {
         data,
         isLoading,
@@ -36,12 +34,12 @@ export default function ProductInfiniteList({
     if (isLoading) return <div>Loading...</div>;
 
     if (isError) return <div>Error...</div>;
-    
+
     return (
         <ul className={'flex flex-wrap gap-y-10 gap-x-4'}>
             {list.length === 0 && <p>아직 등록된 상품이 없습니다.</p>}
             {list.map((item) => (
-                <ProductItem size={'s'} key={item.productSeq} {...item} />
+                <ProductItem key={item.productSeq} {...item} />
             ))}
             {view ? <p>Loading more...</p> : <div ref={onView} />}
         </ul>
