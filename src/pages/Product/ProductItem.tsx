@@ -31,6 +31,7 @@ export default function ProductItem({
                 <p className={'line-clamp-2 text-body2 leading-tight'}>
                     {name}
                 </p>
+
                 <div className={'mt-3'}>
                     {sale && (
                         <>

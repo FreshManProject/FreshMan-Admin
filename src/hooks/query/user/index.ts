@@ -20,7 +20,6 @@ export function useGetUserInfo(status = true) {
         isErrorUserInfo,
     };
 }
-
 export function usePostAdmin() {
     const navigate = useNavigate();
     const { setUserInfo } = useAuthStore();

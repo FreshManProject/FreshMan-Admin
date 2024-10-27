@@ -59,7 +59,7 @@ export default function ProductRegistration() {
         mutateProduct(formData, {
             onSuccess: (_) => {
                 alert('상품이 등록되었습니다.');
-                navigate('/product');
+                // navigate('/product');
             },
             onError: (error) => {
                 alert(error.message);
