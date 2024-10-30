@@ -1,9 +1,9 @@
-import { axiosDefault } from '..';
+import { axiosAuth } from '..';
 import { categoryListType } from '@/types/category';
 
 export async function getCategory(): Promise<categoryListType> {
     try {
-        const response = await axiosDefault.get('/products/categories');
+        const response = await axiosAuth.get('/products/categories');
 
         if (response.data.status === 200) return response.data;
 
@@ -15,7 +15,7 @@ export async function getCategory(): Promise<categoryListType> {
 
 export async function postCategory(data: { name: string }): Promise<void> {
     try {
-        const response = await axiosDefault.post('/products/categories', data);
+        const response = await axiosAuth.post('/products/categories', data);
 
         if (response.data.status === 200) return response.data;
 
@@ -30,7 +30,7 @@ export async function putCategory(data: {
     name: string;
 }): Promise<void> {
     try {
-        const response = await axiosDefault.put('/products/categories', data);
+        const response = await axiosAuth.put('/products/categories', data);
 
         if (response.data.status === 200) return response.data;
 
@@ -46,7 +46,7 @@ export async function deleteCategory({
     categorySeq: number;
 }): Promise<void> {
     try {
-        const response = await axiosDefault.delete(
+        const response = await axiosAuth.delete(
             `/products/categories/${categorySeq}`,
         );
 

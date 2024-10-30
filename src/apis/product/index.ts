@@ -1,5 +1,5 @@
 import { productListType } from '@/types/product';
-import { axiosDefault, axiosForm } from '..';
+import { axiosAuth, axiosForm } from '..';
 
 export async function postProduct(data: FormData): Promise<void> {
     try {
@@ -21,7 +21,7 @@ export async function getInfiniteProductList({
     categorySeq: number;
 }): Promise<productListType> {
     try {
-        const response = await axiosDefault.get('/products', {
+        const response = await axiosAuth.get('/products', {
             params: {
                 page: pageParam,
                 categorySeq,

@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
 import 'react-tabs/style/react-tabs.css';
 
-import { HeaderTitle } from '@/components/common';
+import { HeaderTitle, Nav } from '@/components/common';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { useGetCategory } from '@/hooks/query/category';
 import { CategoryPage, CategoryRegister } from '../Category';
@@ -41,38 +41,46 @@ export default function ProductPage() {
 
     return (
         <>
-            <HeaderTitle
-                title="상품"
-                onSubmit={() => {
-                    navigate('/product/registration');
-                }}
-            />
-            <Tabs className="pt-3">
-                <TabList>
-                    {category.list.map(({ categorySeq, name }) => (
-                        <Tab key={categorySeq}>
-                            <h3 className="h-7 bg-transparent after:none">
-                                {name}
-                            </h3>
+            <Nav />
+            <main className="flex flex-col py-6 sm:gap-4 sm:py-4 sm:pl-20 px-5">
+                <HeaderTitle
+                    title="상품"
+                    onSubmit={() => {
+                        navigate('/product/registration');
+                    }}
+                />
+                <Tabs className="pt-3">
+                    <TabList>
+                        {category.list.map(({ categorySeq, name }) => (
+                            <Tab key={categorySeq}>
+                                <h3 className="h-7 bg-transparent after:none">
+                                    {name}
+                                </h3>
+                            </Tab>
+                        ))}
+                        <Tab>
+                            {addCategory ? (
+                                <div id="add-category-tab">
+                                    <CategoryRegister
+                                        onClick={toggleAddCategory}
+                                    />
+                                </div>
+                            ) : (
+                                <button onClick={toggleAddCategory}>+</button>
+                            )}
                         </Tab>
+                    </TabList>
+                    {category.list.map(({ categorySeq, name }) => (
+                        <TabPanel key={categorySeq}>
+                            <CategoryPage
+                                categorySeq={categorySeq}
+                                name={name}
+                            />
+                        </TabPanel>
                     ))}
-                    <Tab>
-                        {addCategory ? (
-                            <div id="add-category-tab">
-                                <CategoryRegister onClick={toggleAddCategory} />
-                            </div>
-                        ) : (
-                            <button onClick={toggleAddCategory}>+</button>
-                        )}
-                    </Tab>
-                </TabList>
-                {category.list.map(({ categorySeq, name }) => (
-                    <TabPanel key={categorySeq}>
-                        <CategoryPage categorySeq={categorySeq} name={name} />
-                    </TabPanel>
-                ))}
-                <TabPanel></TabPanel>
-            </Tabs>
+                    <TabPanel></TabPanel>
+                </Tabs>
+            </main>
         </>
     );
 }

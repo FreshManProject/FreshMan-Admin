@@ -3,6 +3,7 @@ import GlobalError from './GlobalError';
 import HomePage from './pages/Home/HomePage';
 import RootLayout from './pages/RootLayout';
 import { ProductPage, ProductRegistrationPage } from './pages/Product';
+import { LoginPage } from './pages/Admin';
 
 export default function Router() {
     return createBrowserRouter([
@@ -27,6 +28,10 @@ export default function Router() {
                             element: <ProductRegistrationPage />,
                         },
                     ],
+                },
+                {
+                    path: 'login',
+                    element: <LoginPage />,
                 },
             ],
         },
