@@ -1,4 +1,4 @@
-import { getInfiniteProductList, postProduct } from '@/apis/product';
+import { deleteProduct, getInfiniteProductList, postProduct } from '@/apis/product';
 import { productListType } from '@/types/product';
 import { useInfiniteQuery, useMutation } from '@tanstack/react-query';
 
@@ -22,4 +22,17 @@ export function useGetCategoryProductList(categorySeq: number) {
         initialPageParam: 0,
         getNextPageParam: (lastPage, _) => lastPage.nextCursor,
     });
+}
+
+
+export function useDeleteProduct() {
+    const { mutate: mutateDeleteProduct, isPending: isPendingDeleteProduct } =
+        useMutation({
+            mutationFn: (productSeq: number) => deleteProduct(productSeq),
+        });
+
+    return {
+        mutateDeleteProduct,
+        isPendingDeleteProduct,
+    };
 }
