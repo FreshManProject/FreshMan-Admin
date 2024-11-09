@@ -1,13 +1,11 @@
-import { getInfiniteProductList, postProduct } from "@/apis/product";
-import { productListType } from "@/types/product";
-import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
-
+import { getInfiniteProductList, postProduct } from '@/apis/product';
+import { productListType } from '@/types/product';
+import { useInfiniteQuery, useMutation } from '@tanstack/react-query';
 
 export function usePostProduct() {
     const { mutate: mutateProduct, isPending: isPendingMutateProduct } =
         useMutation({
-            mutationFn: (data: FormData) =>
-                postProduct(data),
+            mutationFn: (data: FormData) => postProduct(data),
         });
 
     return {

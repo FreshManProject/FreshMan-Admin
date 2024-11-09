@@ -14,14 +14,10 @@ export default function ProductItem({
     className,
 }: IProductItemProps) {
     return (
-        <li
-            className={`basis-1/3 md:basis-1/4 lg:basis-1/6 h-full ${className}`}
-        >
-            <img
-                src={image}
-                alt={name}
-                className="h-full w-full object-cover"
-            />
+        <li className={`basis-1/4 lg:basis-1/6 ${className}`}>
+            <figure className="block aspect-[1]">
+                <img src={image} alt={name} className="w-full object-cover" />
+            </figure>
             <div className={'px-2.5'}>
                 <div className={'mb-1 flex items-center justify-between'}>
                     <span className={'text-body4_b'}>{brand}</span>

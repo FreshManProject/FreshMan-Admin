@@ -53,49 +53,50 @@ export default function CategoryPage({ categorySeq, name }: ICategoryPage) {
         <>
             <Card x-chunk="dashboard-07-chunk-0">
                 <CardHeader className="flex justify-between font-bold text-xl">
-                    {isEdit ? (
-                        <form
-                            className="flex gap-3 justify-between w-full"
-                            onSubmit={handlePutCategory}
-                        >
-                            <Input
-                                id="category"
-                                name="category"
-                                type="text"
-                                defaultValue={name}
-                            />
+                    {categorySeq >= 0 &&
+                        (isEdit ? (
+                            <form
+                                className="flex gap-3 justify-between w-full"
+                                onSubmit={handlePutCategory}
+                            >
+                                <Input
+                                    id="category"
+                                    name="category"
+                                    type="text"
+                                    defaultValue={name}
+                                />
 
-                            <div className="flex gap-2">
-                                <Button variant="secondary" type="submit">
-                                    수정
-                                </Button>
-                                <Button
-                                    variant="destructive"
-                                    onClick={() => setIsEdit(!isEdit)}
-                                >
-                                    취소
-                                </Button>
-                            </div>
-                        </form>
-                    ) : (
-                        <>
-                            {name}
-                            <div className="flex gap-2">
-                                <Button
-                                    variant="secondary"
-                                    onClick={() => setIsEdit(!isEdit)}
-                                >
-                                    수정
-                                </Button>
-                                <Button
-                                    variant="destructive"
-                                    onClick={handleDeleteCategory}
-                                >
-                                    삭제
-                                </Button>
-                            </div>
-                        </>
-                    )}
+                                <div className="flex gap-2">
+                                    <Button variant="secondary" type="submit">
+                                        수정
+                                    </Button>
+                                    <Button
+                                        variant="destructive"
+                                        onClick={() => setIsEdit(!isEdit)}
+                                    >
+                                        취소
+                                    </Button>
+                                </div>
+                            </form>
+                        ) : (
+                            <>
+                                {name}
+                                <div className="flex gap-2">
+                                    <Button
+                                        variant="secondary"
+                                        onClick={() => setIsEdit(!isEdit)}
+                                    >
+                                        수정
+                                    </Button>
+                                    <Button
+                                        variant="destructive"
+                                        onClick={handleDeleteCategory}
+                                    >
+                                        삭제
+                                    </Button>
+                                </div>
+                            </>
+                        ))}
                 </CardHeader>
                 <CardContent>
                     <ProductInfiniteList result={result} />

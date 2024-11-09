@@ -54,7 +54,7 @@ const retryRequestWithNewToken = async (
 
     const modifiedConfig = { ...originalRequest };
     modifiedConfig.headers = originalRequest.headers || {};
-    modifiedConfig.headers.Authorization = `Bearer ${newAccessToken}`;
+    modifiedConfig.headers.Authorization = `${newAccessToken}`;
     try {
         return await axios(originalRequest);
     } catch (error) {
@@ -67,12 +67,11 @@ const retryRequestWithNewToken = async (
 axiosAuth.interceptors.request.use(
     async (config) => {
         const modifiedConfig = { ...config };
-        // const accessToken = localStorage.getItem(ACCESSTOKEN);
+        const accessToken = localStorage.getItem(ACCESSTOKEN);
 
-        // if (accessToken) {
-
-        //     modifiedConfig.headers.Authorization = `Bearer ${accessToken}`;
-        // }
+        if (accessToken) {
+            modifiedConfig.headers.Authorization = `${accessToken}`;
+        }
         return modifiedConfig;
     },
     (error) => {

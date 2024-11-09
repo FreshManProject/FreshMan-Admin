@@ -36,12 +36,14 @@ export default function ProductInfiniteList({ result }: IProductInfiniteList) {
     if (isError) return <div>Error...</div>;
 
     return (
-        <ul className={'flex flex-wrap gap-y-10 gap-x-4'}>
-            {list.length === 0 && <p>아직 등록된 상품이 없습니다.</p>}
-            {list.map((item) => (
-                <ProductItem key={item.productSeq} {...item} />
-            ))}
-            {view ? <p>Loading more...</p> : <div ref={onView} />}
-        </ul>
+        <div>
+            <ul className={'grid grid-cols-3 gap-x-4 gap-y-10 md:grid-cols-4 lg:grid-cols-6 w-full'}>
+                {list.length === 0 && <p>아직 등록된 상품이 없습니다.</p>}
+                {list.map((item) => (
+                    <ProductItem key={item.productSeq} {...item} />
+                ))}
+                {view ? <p>Loading more...</p> : <div ref={onView} />}
+            </ul>
+        </div>
     );
 }

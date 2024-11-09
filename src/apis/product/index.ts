@@ -21,6 +21,15 @@ export async function getInfiniteProductList({
     categorySeq: number;
 }): Promise<productListType> {
     try {
+        // if (categorySeq < 0){
+        //     const response = await axiosAuth.get('/products/all', {
+        //         params: {
+        //             page: pageParam,
+        //         },
+        //     });
+        //     if (response.data.status === 200) return response.data;
+        // }
+        
         const response = await axiosAuth.get('/products', {
             params: {
                 page: pageParam,
