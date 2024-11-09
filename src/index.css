@@ -78,3 +78,12 @@
         @apply grid gap-3 p-[1px];
     }
 }
+
+.transform-style-3d {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.backface-hidden {
+    backface-visibility: hidden;
+}

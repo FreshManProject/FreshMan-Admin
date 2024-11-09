@@ -36,8 +36,26 @@ export default function ProductInfiniteList({ result }: IProductInfiniteList) {
     if (isError) return <div>Error...</div>;
 
     return (
-        <div>
-            <ul className={'grid grid-cols-3 gap-x-4 gap-y-10 md:grid-cols-4 lg:grid-cols-6 w-full'}>
+        <div className="w-full">
+            {/* Table Header */}
+            <ul className="w-full">
+                <li className="flex bg-gray-200 font-bold w-full p-4 border-b border-gray-300">
+                    <div className="flex items-center p-1 w-1/12 text-start">
+                        상품 번호
+                    </div>
+                    <div className="flex items-center p-1 px-3 w-5/12 text-start">
+                        상품명
+                    </div>
+                    <div className="flex items-center p-1 px-3 w-2/12 text-start">
+                        브랜드
+                    </div>
+                    <div className="flex items-center p-1 px-3 w-2/12 text-start">
+                        판매가
+                    </div>
+                    <div className="flex items-center p-1 w-1/12 text-start">
+                        재고
+                    </div>
+                </li>
                 {list.length === 0 && <p>아직 등록된 상품이 없습니다.</p>}
                 {list.map((item) => (
                     <ProductItem key={item.productSeq} {...item} />
