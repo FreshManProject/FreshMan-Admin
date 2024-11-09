@@ -84,9 +84,20 @@ export default function ProductInfiniteList({ result }: IProductInfiniteList) {
             .map((item, i) => (checkList[i] ? item.productSeq : null))
             .filter((productSeq) => productSeq !== null) as number[];
 
+        let success = true;
         selectedProductSeqList.forEach((productSeq) => {
-            mutateDeleteProduct(productSeq);
+            mutateDeleteProduct(productSeq, {
+                onError: (error) => {
+                    alert(`${productSeq} 상품 삭제를 실패했습니다.`);
+                    success = false;
+                },
+            });
         });
+
+        if (success) {
+            alert('상품이 삭제되었습니다.');
+        }
+
     };
 
     return (

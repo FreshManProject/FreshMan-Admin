@@ -71,7 +71,7 @@ export default function ProductItem({
                 <button onClick={toggleMenu} className="text-center">
                     <MoreHorizontal />
                 </button>
-                {menuVisible && <ProductMenu />}
+                {menuVisible && <ProductMenu productSeq={productSeq} />}
             </div>
         </li>
     );

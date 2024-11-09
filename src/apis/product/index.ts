@@ -1,4 +1,4 @@
-import { productListType } from '@/types/product';
+import { ProductDetailType, productListType } from '@/types/product';
 import { axiosAuth, axiosForm } from '..';
 
 
@@ -45,15 +45,14 @@ export async function getInfiniteProductList({
     }
 }
 
-export async function getProductDetail(productSeq: number): Promise<void> {
+export async function getProductDetail(
+    productSeq: number,
+): Promise<ProductDetailType> {
     try {
         const response = await axiosAuth.get(`/products/${productSeq}`);
-
-        if (response.data.status === 200) return response.data;
-
-        throw new Error(`${response.data.status} ${response.data.message}`);
+        return response.data.data;
     } catch (error) {
-        throw new Error(`${error}\n상품 상세 정보를 불러오는데 실패했습니다.`);
+        throw Error;
     }
 }
 

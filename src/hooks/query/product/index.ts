@@ -1,6 +1,11 @@
-import { deleteProduct, getInfiniteProductList, postProduct } from '@/apis/product';
+import {
+    deleteProduct,
+    getInfiniteProductList,
+    getProductDetail,
+    postProduct,
+} from '@/apis/product';
 import { productListType } from '@/types/product';
-import { useInfiniteQuery, useMutation } from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 
 export function usePostProduct() {
     const { mutate: mutateProduct, isPending: isPendingMutateProduct } =
@@ -24,7 +29,6 @@ export function useGetCategoryProductList(categorySeq: number) {
     });
 }
 
-
 export function useDeleteProduct() {
     const { mutate: mutateDeleteProduct, isPending: isPendingDeleteProduct } =
         useMutation({
@@ -34,5 +38,33 @@ export function useDeleteProduct() {
     return {
         mutateDeleteProduct,
         isPendingDeleteProduct,
+    };
+}
+
+export function usePutProduct() {
+    const { mutate: mutateProduct, isPending: isPendingMutateProduct } =
+        useMutation({
+            mutationFn: (data: FormData) => postProduct(data),
+        });
+
+    return {
+        mutateProduct,
+        isPendingMutateProduct,
+    };
+}
+
+export function useGetProductDetail(productSeq: number) {
+    const {
+        data: productInfo,
+        isLoading: isLoadingProductInfo,
+        isError: isErrorProductInfo,
+    } = useQuery({
+        queryKey: [`productDetail${productSeq}`],
+        queryFn: () => getProductDetail(productSeq),
+    });
+    return {
+        productInfo,
+        isErrorProductInfo,
+        isLoadingProductInfo,
     };
 }
